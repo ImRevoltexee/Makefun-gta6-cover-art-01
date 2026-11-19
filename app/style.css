@@ -1,0 +1,194 @@
+@font-face {
+  font-family: "Anton";
+  src: url("./fonts/Anton-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bebas Neue";
+  src: url("./fonts/BebasNeue-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+body {
+  background: #120a1c;
+  color: #f5eef7;
+  font: 15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.app {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 24px;
+  min-height: 100vh;
+}
+
+/* ---- left control column ---- */
+.controls {
+  width: 340px;
+  flex: 0 0 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  border: 1px solid #3d2148;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #1d1026, #160b1f);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+}
+.brand h1 {
+  margin: 0;
+  font-family: "Anton", "Arial Narrow", sans-serif;
+  font-size: 34px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #ff9a3d, #ff2e88 55%, #7b5cff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.tagline { margin: 4px 0 0; color: #c9b8d4; font-size: 13px; }
+
+.group {
+  margin: 0;
+  padding: 14px;
+  border: 1px solid #3d2148;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.group legend {
+  padding: 0 6px;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.4px;
+  color: #ffb35c;
+  text-transform: uppercase;
+}
+label { display: flex; flex-direction: column; gap: 5px; font-weight: 600; font-size: 13px; }
+label.check { flex-direction: row; align-items: center; gap: 8px; font-weight: 500; }
+input[type="text"], select {
+  font: inherit;
+  color: #f5eef7;
+  padding: 9px 10px;
+  border: 1px solid #5a3a68;
+  border-radius: 8px;
+  background: #241233;
+}
+input[type="text"]:focus, select:focus { outline: 2px solid #ff2e88; outline-offset: 1px; }
+input[type="range"] { width: 100%; accent-color: #ff2e88; }
+input[type="file"] { display: none; }
+
+.row { display: flex; gap: 8px; }
+.row.wrap { flex-wrap: wrap; }
+.hint { margin: 0; color: #9d8bab; font-size: 12px; font-weight: 400; }
+
+.file-btn {
+  display: block;
+  text-align: center;
+  padding: 11px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #ff7a18, #ff2e88);
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+}
+button { font: inherit; color: inherit; cursor: pointer; }
+.chip {
+  padding: 7px 11px;
+  border: 1px solid #5a3a68;
+  border-radius: 999px;
+  background: #241233;
+  font-size: 13px;
+  font-weight: 600;
+}
+.chip[aria-pressed="true"] {
+  border-color: #ff2e88;
+  background: #ff2e88;
+  color: #fff;
+}
+.swatch {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 10px 6px 6px;
+  border: 1px solid #5a3a68;
+  border-radius: 999px;
+  background: #241233;
+  font-size: 13px;
+  font-weight: 600;
+}
+.swatch[aria-pressed="true"] { border-color: #ffb35c; box-shadow: 0 0 0 1px #ffb35c; }
+.swatch .dot {
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+.export {
+  flex: 1 1 46%;
+  padding: 11px 8px;
+  border: 0;
+  border-radius: 8px;
+  background: #2c1740;
+  border: 1px solid #7b5cff;
+  font-weight: 800;
+  font-size: 13px;
+}
+.export:hover { background: #3a2060; }
+.export.all {
+  flex-basis: 100%;
+  background: linear-gradient(90deg, #ff7a18, #ff2e88);
+  border: 0;
+  color: #fff;
+}
+#status { margin: 0; min-height: 1.2em; color: #8dff9a; font-size: 13px; }
+
+/* ---- preview column ---- */
+.preview {
+  flex: 1 1 auto;
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  position: sticky;
+  top: 24px;
+}
+#cover {
+  width: min(100%, calc(100vh - 110px));
+  aspect-ratio: 1 / 1;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px #3d2148;
+  cursor: grab;
+  touch-action: none;
+}
+#cover:active { cursor: grabbing; }
+.preview-note { margin: 0; color: #9d8bab; font-size: 13px; }
+
+/* ---- screenshot mode: cover alone, filling the viewport ---- */
+body.shot-cover .controls, body.shot-cover .preview-note { display: none; }
+body.shot-cover .app { padding: 0; }
+body.shot-cover .preview { max-width: none; width: 100vw; height: 100vh; position: static; }
+body.shot-cover #cover {
+  width: 100vw;
+  height: 100vh;
+  aspect-ratio: auto;
+  object-fit: contain;
+  border-radius: 0;
+  box-shadow: none;
+  background: #120a1c;
+}
+/* editor shot: roomier preview so the cover reads well at 1280x720 */
+body.shot-editor .app { gap: 20px; padding: 16px; }
+body.shot-editor .controls { width: 320px; flex-basis: 320px; }
+body.shot-editor #cover { width: min(100%, calc(100vh - 60px)); }
+
+@media (max-width: 900px) {
+  .app { flex-direction: column; align-items: center; }
+  .controls { width: 100%; max-width: 560px; flex-basis: auto; }
+  .preview { position: static; width: 100%; }
+}
